@@ -1,0 +1,20 @@
+/* user_management.html 背景スタイル */
+.user-management-body {
+    background-color: #eef2f7;
+}
+
+/* テーブルの丸み */
+.table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* フォームカードのスタイル調整 */
+.card {
+    border-radius: 10px;
+}
+
+/* ボタンスタイルの統一 */
+.btn {
+    border-radius: 8px;
+}

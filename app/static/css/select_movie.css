@@ -1,0 +1,26 @@
+
+.select-movie-body {
+    background-color: #f8f9fb;
+}
+
+/* コメント欄のスタイル調整 */
+.comments-section {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+/* 動画のカードスタイル調整 */
+/* video {
+    max-height: 500px;
+    object-fit: cover;
+} */
+
+video {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain; /* cover → contain に変更 */
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+}

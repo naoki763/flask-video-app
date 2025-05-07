@@ -1,0 +1,41 @@
+.navbar {
+  position: fixed;       /* ← 上部固定 */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;         /* 他の要素より前面に */
+  background-color: #fff; /* 背景色（透明を避ける） */
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  min-height: 48px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* 少し影を追加 */
+}
+
+body {
+  padding-top: 60px;  /* ナビバーの高さ分スペースを確保 */
+}
+
+  
+  .navbar .container-fluid {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+  
+  .navbar .nav-link {
+    padding: 4px 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  
+  .auth-buttons,
+  .username {
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar .container-fluid {
+      flex-wrap: wrap;
+    }
+  }
+  

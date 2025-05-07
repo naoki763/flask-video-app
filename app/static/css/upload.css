@@ -1,0 +1,16 @@
+/* upload.html 背景スタイル */
+.upload-body {
+    background-color: #f3f6f9;
+}
+
+/* ドラッグ＆ドロップエリアのスタイル調整 */
+.drag-drop-area {
+    border: 2px dashed #007bff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.drag-drop-area:hover, .drag-drop-area.drag-over {
+    background-color: #e2eefa;
+}

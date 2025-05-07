@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}動画管理画面{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/select_after.css') }}">
+{% endblock %}
+
+{% block container_class %}
+    <!-- ★追加：containerクラスの上書き -->
+    wrapper container-fluid px-0
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid  d-flex px-0">
+    <!-- 左サイドメニュー -->
+    <div class="sidebar-wrapper">
+        <!-- ▼ 元の aside を移動 -->
+        <aside class="sidebar">
+            <button class="menu-btn" onclick="location.href='/'">ホーム</button>
+            {% for year in years %}
+                <a href="{{ url_for('video.video_list_by_year', year=year) }}" class="year-button">{{ year }}</a>
+            {% endfor %}
+        </aside>
+        <!-- ★ 追加：サイドバー開閉ボタン -->
+        <button id="toggle-sidebar" class="toggle-btn"><</button>
+    </div>
+
+    <!-- メインコンテンツ -->
+    <main class="main-content flex-fill">
+        <div class="header-area d-flex justify-content-between align-items-center mb-3">
+            <h2 class="year-title">{{ year }}</h2>
+            <div class="auth-buttons">
+                <button class="btn btn-success" onclick="location.href='/video/upload'">アップロード</button>
+            </div>
+        </div>
+
+        <div class="media-area">
+            {% for month, videos in videos_by_month.items() %}
+                <h3>{{ month }}月</h3>
+                <div class="video-grid">
+                    {% for video in videos %}
+                        <div class="video-item">
+                            <div class="video-header d-flex justify-content-between align-items-center mb-1">
+                                <p class="video-title">{{ video.title }}</p>
+                                <!-- <input type="radio" name="video_select" value="{{ video.id }}"> -->
+                            </div>
+
+                            <a href="{{ url_for('video.show_video_with_comments', year=video.created_at.year, video_id=video.id) }}">
+                                <img src="{{ video.thumbnail_url }}" class="video-thumbnail" alt="{{ video.title }}">
+                            </a>
+                            {% if current_user.is_authenticated %}
+                                {% if current_user.role == 'Owner' %}
+                                    <form action="{{ url_for('video.delete_video', video_id=video.id) }}" method="POST" class="mt-2">
+                                        <button type="submit" class="btn btn-sm btn-danger w-100" onclick="return confirm('本当に削除しますか？');">削除</button>
+                                    </form>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/sidebar_toggle.js') }}"></script>
+{% endblock %}
+

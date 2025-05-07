@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}動画詳細ページ{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/select_movie.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <a class="btn btn-outline-secondary mb-3" href="{{ url_for('video.video_list_by_year', year=video.created_at.year) }}">
+        &larr; 前の画面に戻る
+    </a>
+
+    <div class="video-section">
+        <div class="main-video">
+            <video width="100%" controls>
+                <source src="{{ video.url }}" type="video/mp4">
+            </video>
+            <p class="text-center mt-2">
+                {{ video.title }}（{{ video.posted_at.strftime('%Y/%m/%d %H:%M') }} 投稿）
+            </p>
+        </div>
+    </div>
+
+    <!-- コメントエリア -->
+    <form id="comment-form" class="mt-4"
+        data-post-url="{{ url_for('comment.comment_handler', year=video.created_at.year, video_id=video.id) }}">
+        <div class="input-group">
+            <input type="text" id="comment-input" name="content" class="form-control"
+                placeholder="コメントを入力" required>
+            <button type="submit" class="btn btn-primary">送信</button>
+        </div>
+    </form>
+
+    <div class="comment-section mt-4" id="comment-list">
+        <h5>コメント欄</h5>
+        {% for comment in comments %}
+        <div class="comment border rounded p-2 mb-2">
+            <div class="username fw-bold">
+                {% if comment.user %}
+                    {{ comment.user.username }}（{{ comment.posted_at.strftime('%Y/%m/%d %H:%M') }}）
+                {% else %}
+                ユーザー情報なし
+                {% endif %}
+            </div>
+            <div class="text">{{ comment.content }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/comments.js') }}"></script>
+{% endblock %}

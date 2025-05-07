@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}動画アップロード画面{% endblock %}
+
+{% block styles %}
+<!-- 必要なら追加CSSをここに -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h2 class="text-center mb-4">動画をアップロード</h2>
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div id="file-error" class="text-danger my-2" style="display: none;"></div>
+    
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form action="{{ url_for('video.upload_video') }}" method="POST" enctype="multipart/form-data">
+                {{form.hidden_tag()}}
+                <div class="mb-3">
+                    <label for="title" class="form-label">タイトル</label>
+                    <input type="text" id="title" name="title" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="file" class="form-label">動画ファイルを選択</label>
+                    <input type="file" id="file" name="file" class="form-control" accept="video/*,.mts,.m2ts" required>
+                </div>
+
+                <div class="mb-3">
+                    <video id="preview" class="w-100" controls hidden></video>
+                </div>
+
+                <button type="submit" id="uploadBtn" class="btn btn-success w-100">アップロード</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card drag-drop-area text-center py-5">
+        <p>ドラッグ＆ドロップでもファイルをアップロードできます</p>
+        <p>またはクリックしてファイルを選択</p>
+        <input type="file" id="drag-drop-input" accept="video/*" hidden>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+<script>
+    document.getElementById('file').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const video = document.getElementById('preview');
+        const url = URL.createObjectURL(file);
+        video.src = url;
+        video.hidden = false;
+    });
+
+    document.querySelector('form').addEventListener('submit', function() {
+        document.getElementById('uploadBtn').disabled = true;
+    });
+</script>
+{% endblock %}

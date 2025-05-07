@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}動画管理システム{% endblock %}
+
+{% block container_class %}container-fluid p-0{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<!-- 追加: Googleフォントの読み込み -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold text-white">ZOSUGLE</h1>
+        <p class="lead mb-4 text-white">すべての動画を簡単に共有</p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<!-- 変更: py-4をpy-5に変更 -->
+<div class="container py-5">
+    <!-- Features Section -->
+    <!-- 変更: py-4をpy-3に変更 -->
+    <section class="py-3">
+        <!-- 変更: text-whiteクラスを追加、mb-4をmb-5に変更 -->
+        <h2 class="text-center mb-5 text-white">機能</h2>
+        <div class="row g-4">
+            <!-- 年別アーカイブカード -->
+            <div class="col-12 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="d-flex align-items-center justify-content-center mb-3">
+                            <div class="icon-wrapper">
+                                <i class="fas fa-search text-white bg-primary p-3 rounded-circle"></i>
+                            </div>
+                            <h4 class="m-0 ms-2">年別アーカイブ</h4>
+                        </div>
+                        <p class="text-muted">年別に整理された動画コレクションを素早く閲覧できます。</p>
+                        <div class="d-flex flex-wrap justify-content-center mt-4">
+                            {% for year in years %}
+                                <button onclick="location.href='/video/list/{{ year }}'" class="btn year-btn">
+                                    <i class="far fa-calendar-alt me-1"></i>{{ year }}
+                                </button>
+                            {% endfor %}
+                            <!-- <button class="btn year-btn" disabled>...</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 動画アップロードカード -->
+            <div class="col-12">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="d-flex align-items-center justify-content-center mb-3">
+                            <div class="icon-wrapper">
+                                <i class="fas fa-upload text-white bg-primary p-3 rounded-circle"></i>
+                            </div>
+                            <h4 class="m-0 ms-2">動画アップロード</h4>
+                        </div>
+                        <p class="text-muted">簡単な手順で動画をアップロードし、分類できます。</p>
+                        <div class="card-action-area">
+                            <button onclick="location.href='/video/upload'" class="btn btn-outline-primary">
+                                アップロードへ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // フッターの年を自動更新
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentYear = new Date().getFullYear();
+        document.querySelector('.footer p').innerHTML =
+            document.querySelector('.footer p').innerHTML.replace('{{ current_year }}', currentYear);
+    });
+</script>
+{% endblock %}

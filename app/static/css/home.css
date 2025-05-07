@@ -1,0 +1,241 @@
+/* イケイケUIのためのカスタムスタイル */
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --secondary: #f43f5e;
+  --dark: #1e293b;
+  --light: #f8fafc;
+  --accent: #10b981;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  /* グラデーションの開始色と終了色を変数で定義 */
+  --gradient-start: #ff00cc;
+  --gradient-end: #333399;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%); /* 背景のグラデーションを変数で指定 */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  color: var(--light);
+}
+
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), /* オーバーレイの色を変更 */
+              url('../image/haikei_1.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 0; /* 上下のパディングを増やす */
+  border-radius: 0 0 50% 50% / 0 0 20% 20%; /* 下部を丸く切り取るように変更 */
+  box-shadow: var(--card-shadow);
+  min-height: 50vh; /* ビューポートの高さを増やす */
+  height: 100%; 
+  background-attachment: fixed; /* 背景を固定し、スクロール時にパララックス効果を作る */
+  background-repeat: no-repeat;
+}
+
+/* hero-section::afterを削除 */
+
+.hero-section .display-4 {
+  font-weight: 800; /* フォントの太さを増す */
+  letter-spacing: -2px; /* 文字間隔を狭める */
+  margin-bottom: 1.5rem; /* 下部のマージンを増やす */
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)); /* グラデーションを変数で指定 */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* テキストシャドウを追加 */
+}
+
+.display-4::after {
+  content: '';
+  position: absolute;
+  bottom: -15px; /* 位置を下げる */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px; /* 幅を広げる */
+  height: 6px; /* 高さを増やす */
+  background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%); /* グラデーションを変数で指定 */
+  border-radius: 3px; /* 角を丸くする */
+}
+
+.lead {
+  font-size: 1.5rem; /* フォントサイズを大きくする */
+  opacity: 0.9;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* シャドウを濃くする */
+  margin-bottom: 2rem; /* 下部のマージンを追加 */
+}
+
+.action-btn {
+  padding: 1rem 2rem; /* パディングを増やす */
+  font-weight: 600;
+  border-radius: 50px; /* 角を丸くする */
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px; /* 文字間隔を広げる */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.primary-action {
+  background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%); /* グラデーションを変数で指定 */
+  color: white;
+  border: none;
+}
+
+.primary-action:hover {
+  transform: translateY(-4px); /* ホバー時の上方向の移動量を増やす */
+  box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -5px rgba(0, 0, 0, 0.1); /* ホバー時のシャドウを大きくする */
+}
+
+.container.py-5 {
+  padding-top: 0rem !important; /* 上部の余白を減らす */
+  padding-bottom: 0rem !important; /* 下部の余白を減らす */
+}
+
+
+.card {
+  background: var(--card-bg);
+  border: none;
+  border-radius: 20px; /* 角の丸みを増す */
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease; /* トランジションの速度を速める */
+  box-shadow: var(--card-shadow);
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-8px); /* ホバー時の上方向の移動量を増やす */
+  box-shadow: 0 25px 30px -10px rgba(0, 0, 0, 0.15), 0 15px 15px -10px rgba(0, 0, 0, 0.1); /* ホバー時のシャドウを大きくする */
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px; /* 高さを増やす */
+  background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%); /* グラデーションを変数で指定 */
+}
+
+.card-body {
+  padding: 2.5rem; /* パディングを増やす */
+}
+
+.card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px; /* 幅を増やす */
+  height: 70px; /* 高さを増やす */
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%); /* グラデーションを変数で指定 */
+  color: white;
+  border-radius: 50%;
+  margin-bottom: 2rem; /* 下部のマージンを増やす */
+  font-size: 2rem; /* フォントサイズを大きくする */
+  box-shadow: 0 15px 20px -5px rgba(255, 0, 204, 0.4); /* シャドウの色を変更 */
+  animation: icon-pop 0.6s ease-in-out infinite alternate; /* アニメーションの速度を速める */
+}
+
+h2, h4 {
+  color: var(--dark);
+  font-weight: 800; /* フォントの太さを増す */
+}
+
+h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 1rem; /* 下部のパディングを増やす */
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px; /* 幅を広げる */
+  height: 4px; /* 高さを増やす */
+  background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%); /* グラデーションを変数で指定 */
+  border-radius: 3px; /* 角を丸くする */
+}
+
+.text-muted {
+  color: #64748b !important; /* 色を変更 */
+}
+
+.year-btn {
+  background: var(--light);
+  border: 2px solid rgba(255, 0, 204, 0.3); /* ボーダーの色と太さを変更 */
+  color: var(--dark);
+  border-radius: 15px; /* 角の丸みを増す */
+  padding: 0.75rem 1.5rem; /* パディングを増やす */
+  margin: 0.5rem; /* マージンを増やす */
+  transition: all 0.3s ease;
+  font-weight: 600; /* フォントの太さを増す */
+}
+
+.year-btn:hover {
+  background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%); /* グラデーションを変数で指定 */
+  color: white;
+  transform: translateY(-3px); /* ホバー時の上方向の移動量を増やす */
+  box-shadow: 0 6px 8px -2px rgba(255, 0, 204, 0.4); /* ホバー時のシャドウの色を変更 */
+}
+
+.btn-outline-primary {
+  border-color: var(--gradient-start); /* ボーダーの色を変更 */
+  color: var(--gradient-start); /* テキストの色を変更 */
+  border-radius: 15px; /* 角の丸みを増す */
+  font-weight: 600;
+  padding: 0.75rem 2rem; /* パディングを増やす */
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%); /* グラデーションを変数で指定 */
+  color: white;
+  transform: translateY(-3px); /* ホバー時の上方向の移動量を増やす */
+  box-shadow: 0 6px 8px -2px rgba(255, 0, 204, 0.4); /* ホバー時のシャドウの色を変更 */
+}
+
+/* カスタムアニメーション */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 204, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(255, 0, 204, 0); /* シャドウの広がりを大きくする */
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 204, 0);
+  }
+}
+
+@keyframes icon-pop {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2); /* アイコンの拡大率を上げる */
+  }
+}
+
+.icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px; /* 角の丸みを増す */
+  margin-right: 12px; /* 右のマージンを増やす */
+  animation: pulse 1.5s infinite; /* アニメーションの速度を速める */
+}
+
+.card-action-area {
+  margin-top: 2rem; /* 上部のマージンを増やす */
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,36 @@
+<nav class="navbar navbar-light bg-white shadow-sm py-1">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
+  
+      <!-- 左側：ロゴ + メニュー -->
+      <div class="d-flex align-items-center flex-wrap">
+        <a class="navbar-brand me-4" href="/">
+          <i class="fas fa-film me-2"></i>ZOSUGLE
+        </a>
+        <div class="d-flex gap-2 flex-wrap">
+          <a class="nav-link active" href="/"><i class="fas fa-home me-1"></i>ホーム</a>
+          <a class="nav-link" href="{{url_for('video.upload_form')}}"><i class="fas fa-upload me-1"></i>アップロード</a>
+          {% if current_user.is_authenticated %}
+              {% if current_user.role == 'Owner' %}
+                <a class="nav-link" href="{{url_for('user.user_management')}}"><i class="fas fa-users-cog me-1"></i>ユーザー管理</a>
+              {% endif %}
+          {% endif %}
+        </div>
+      </div>
+  
+      <!-- 右側：ユーザー情報 -->
+      <div class="d-flex align-items-center gap-2 mt-2 mt-lg-0">
+        {% if current_user.is_authenticated %}
+          <span class="username">アカウント：<strong>{{ current_user.username }}</strong></span>
+          <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger btn-sm">
+            <i class="fas fa-sign-out-alt me-1"></i>ログアウト
+          </a>
+        {% else %}
+          <a href="{{ url_for('auth.login_form') }}" class="btn btn-primary btn-sm">
+            <i class="fas fa-sign-in-alt me-1"></i>ログイン
+          </a>
+        {% endif %}
+      </div>
+  
+    </div>
+  </nav>
+  

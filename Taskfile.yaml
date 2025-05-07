@@ -76,8 +76,8 @@ tasks:
     cmds:
       - aws logs get-log-events   --log-group-name video-log-group   --log-stream-name video-log-stream   --endpoint-url=http://host.docker.internal:4566
 
-  dev-start:
-    desc: start dev environment
+  dev-config:
+    desc: configure dev environment
     cmds:
       - task uv-start
       - task docker-containers-up
