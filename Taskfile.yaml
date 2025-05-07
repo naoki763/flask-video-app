@@ -1,0 +1,84 @@
+version: '3.0'
+
+tasks:
+  default:
+    cmds:
+      - task --list
+
+  uv-start:
+    desc: start uv
+    cmds:
+      - uv venv
+      - uv sync
+
+  format:
+    desc: format code
+    cmds:
+      - uv run ruff format
+
+  lint:
+    desc: lint code
+    cmds:
+      - uv run ruff check
+
+  app-start:
+    desc: flask app start
+    cmds:
+      - ENV=local uv run flask --app app.run run
+
+  migrate-init:
+    desc: db migrate init
+    cmds:
+    - uv run flask --app "app.factory:create_app()" db init
+    
+  migrate-history:
+    desc: show migrate history
+    cmds:
+    - uv run flask --app "app.factory:create_app()" db history
+
+  migrate-create:
+    desc: create db_migration file when db model changed
+    cmds:
+    - uv run flask --app "app.factory:create_app()" db migrate -m "Auto Migrate!"
+
+  migrate-upgrade:
+    desc: upgrade db
+    cmds:
+    - uv run flask --app "app.factory:create_app()" db upgrade
+
+  migrate-downgrade:
+    desc: downgrade db
+    cmds:
+    - uv run flask --app "app.factory:create_app()" db downgrade
+
+  approach-db:
+    desc: approach to db-container
+    cmds:
+    - docker exec -it video_manager_db bash
+
+  docker-containers-up:
+    desc: docker compose up for localstack and db
+    cmds:
+      - docker compose -f Docker/docker-compose.yml up -d
+
+  s3-create:
+    desc: create service in localstack-container
+    cmds:
+      - uv run tools/localstack/localstack.py
+
+  s3-list:
+    desc: list s3 buckets in localstack-container
+    cmds:
+      - aws --endpoint-url=http://host.docker.internal:4566 s3 ls s3://my-video-bucket
+
+  cw-event-list:
+    desc: list cloudwatch events in localstack-container
+    cmds:
+      - aws logs get-log-events   --log-group-name video-log-group   --log-stream-name video-log-stream   --endpoint-url=http://host.docker.internal:4566
+
+  dev-start:
+    desc: start dev environment
+    cmds:
+      - task uv-start
+      - task docker-containers-up
+      - task s3-create

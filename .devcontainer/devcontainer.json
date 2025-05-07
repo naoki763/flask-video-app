@@ -1,0 +1,70 @@
+{
+    "name": "flask-video-app",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "dev",
+    "remoteUser": "vscode", //devcontainer内のターミナルやタスクなどの実行するユーザを指定
+    
+    "features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {} //コンテナ内でホストの Docker を使用できる設定
+	},
+    "workspaceFolder": "/workspace", //ワークスペースのルートディレクトリを設定
+    
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspace,type=bind"
+        // "source=${localWorkspaceFolder},target=/workspace/${localWorkspaceFolderBasename},type=bind"
+    ], //ホストのディレクトリをコンテナ内にマウントする設定
+
+    
+    "customizations": {
+        "vscode": {
+            "extensions": [ //vscodeの拡張機能を追加
+                "ms-python.python",
+                "charliermarsh.ruff",
+                "esbenp.prettier-vscode",
+                "task.vscode-task",
+                "ms-azuretools.vscode-docker",
+                "p1c2u.docker-compose",
+                "localstack.localstack",
+                "mhutchie.git-graph",
+                "amazonwebservices.aws-toolkit-vscode",
+                "mtxr.sqltools",
+                "mtxr.sqltools-driver-pg",
+                "hashicorp.terraform"
+            ],
+            "settings": {
+                // 👇 AWS Toolkit 用 LocalStack設定をここに追加
+
+                "[python]":{ //python拡張機能の設定
+                    "editor.formatOnSave": true, //保存時にフォーマット
+                    "editor.codeActionsOnSave": {
+                    "source.organizeImports.ruff": "explicit",
+                    "source.fixAll.ruff": "explicit"
+                    },
+                    "editor.defaultFormatter": "charliermarsh.ruff" //エディタのデフォルトフォーマッタを指定
+                },
+                "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+            
+                "ruff.path": [
+                    "${workspaceFolder}/.venv/bin/ruff"
+                ], // 仮想環境の Ruff を使用
+
+                "python.analysis.autoImportCompletions": true,
+                "python.analysis.completeFunctionParens": true,
+                "python.analysis.extraPaths": [
+                    "${workspaceFolder}/.venv/lib/python3.12/site-packages",
+                    "${workspaceFolder}/src"
+                ],
+                "python.autoComplete.extraPaths": [
+                    "${workspaceFolder}/.venv/lib/python3.12/site-packages",
+                    "${workspaceFolder}/src"
+                ],
+                "[terraform]": {
+                    "editor.formatOnSave": true
+                }
+            }
+        }
+    },
+    "postCreateCommand": "mise use -y && mise install -y" //devcontainer作成後に実行するコマンド
+
+ //devcontainer作成後に実行するコマンド
+}

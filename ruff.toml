@@ -1,0 +1,41 @@
+# Pythonの対象バージョン
+target-version = "py312"
+
+# Lint 設定
+[lint]
+select = [
+    "E",  # Pycodestyle (Error)
+    "F",  # Pyflakes (Unused imports, undefined variables, etc.)
+    "W",  # Pycodestyle (Warning)
+    "I",  # isort (Import sorting)
+    "N",  # PEP8 Naming (関数名・変数名の規約)
+    "UP", # pyupgrade (Python のバージョンアップ関連)
+    "B",  # flake8-bugbear (潜在的なバグの検出)
+    "C4", # flake8-comprehensions (リスト内包表記の最適化)
+    "T20" # flake8-print (print 文の警告)
+]
+ignore = ["E501"] # 長すぎる行（Blackと競合するため）
+fixable = ["I", "E", "F", "W"]  # ✅ `lint` セクション内に移動！
+
+# 除外するディレクトリ（venv や .mypy_cache など不要なフォルダを指定）
+exclude = [".git", "__pycache__", "venv", ".mypy_cache", ".pytest_cache"]
+
+# isort の設定（インポート順の整理）
+[lint.isort]
+combine-as-imports = true
+force-sort-within-sections = true
+lines-after-imports = 2
+
+# フォーマット設定（Blackと統一する）
+[format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+docstring-code-format = true
+
+# pyupgrade（最新のPython記法に変換）
+[lint.pyupgrade]
+keep-runtime-typing = true
+
+[lint.per-file-ignores]
+"app/factory.py" = ["F401"]

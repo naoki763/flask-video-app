@@ -1,0 +1,6 @@
+[tools]
+1password = "latest"
+task = "latest"
+uv = "latest"
+awscli = "latest"
+terraform = "latest"

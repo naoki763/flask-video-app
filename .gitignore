@@ -1,0 +1,17 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+static/image/
+# Virtual environments
+.venv
+.ruff_cache
+*.session.sql
+.env.local
+
+# Project-specific image directory
+app/static/image/
+.vscode/settings.json

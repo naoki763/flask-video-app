@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: devcontainer-flask-video-app
+    privileged: true
+    volumes:
+      - ..:/workspace:cached #ホスト側（作っているローカルPC側の「..」のフォルダ）/workspaceにマウント
+      - /var/run/docker.sock:/var/run/docker.sock #コンテナ内からホストのDockerエンジンを操作するための設定
+    command: sleep infinity
+    
+    stdin_open: true   # コンテナをバックグラウンドで永続的に実行させる
+    tty: true
+    init: true   #適切なプロセス管理を行うためにinitプロセスを使用する
+
+    

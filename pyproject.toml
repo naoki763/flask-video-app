@@ -1,0 +1,32 @@
+[project]
+name = "video-manager-app"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "boto3>=1.37.13",
+    "email-validator>=2.2.0",
+    "ffmpeg-python>=0.2.0",
+    "flask>=3.1.0",
+    "flask-login>=0.6.3",
+    "flask-migrate>=4.1.0",
+    "flask-pydantic>=0.13.0",
+    "flask-socketio>=5.5.1",
+    "flask-sqlalchemy>=3.1.1",
+    "flask-wtf>=1.2.2",
+    "gunicorn>=23.0.0",
+    "postgres>=4.0",
+    "psycopg2-binary>=2.9.10",
+    "pydantic>=2.11.3",
+    "python-dotenv>=1.0.1",
+    "sqlalchemy>=2.0.38",
+    "watchtower>=3.4.0",
+]
+
+[dependency-groups]
+dev = [
+    "debugpy>=1.8.12",
+    "invoke>=2.2.0",
+    "ruff>=0.9.7",
+]
